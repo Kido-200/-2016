@@ -1,0 +1,147 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+[class*=album] {
+  width: 600px;
+  height: 400px;
+  margin: 10px;
+  position: relative;
+}
+.album1 img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.album2 img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.album2 img:nth-child(1) {
+  clip-path: polygon(0 0, 75% 0, 25% 100%, 0% 100%);
+}
+.album2 img:nth-child(2) {
+  clip-path: polygon(75% 0, 100% 0, 100% 100%, 25% 100%);
+}
+.album3 .left img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.album3 .right img {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  z-index: 2;
+}
+.album3 .right img:nth-child(1) {
+  right: 0;
+  top: 0;
+}
+.album3 .right img:nth-child(2) {
+  right: 0;
+  bottom: 0;
+}
+.album4 img {
+  width: 50%;
+  height: 50%;
+  position: absolute;
+}
+.album4 img:nth-child(1) {
+  left: 0;
+  top: 0;
+}
+.album4 img:nth-child(2) {
+  right: 0;
+  top: 0;
+}
+.album4 img:nth-child(3) {
+  left: 0;
+  bottom: 0;
+}
+.album4 img:last-child {
+  right: 0;
+  bottom: 0;
+}
+.album5 .left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 400px;
+}
+.album5 .left .top {
+  width: 100%;
+  height: 70%;
+}
+.album5 .left .top img {
+  width: 100%;
+  height: 100%;
+}
+.album5 .left .bottom {
+  width: 100%;
+  height: 30%;
+  font-size: 0;
+}
+.album5 .left img {
+  width: 50%;
+  height: 100%;
+}
+.album5 .right {
+  position: absolute;
+  width: 200px;
+  height: 100%;
+  top: 0;
+  right: 0;
+  font-size: 0;
+}
+.album5 .right img {
+  width: 100%;
+  height: 50%;
+}
+.album5 .right img:nth-child(1) {
+  top: 0;
+  right: 0;
+}
+.album5 .right img:last-child {
+  top: 0;
+  bottom: 0;
+}
+.album6 .left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 400px;
+}
+.album6 .left .top {
+  width: 100%;
+  height: 66.66666667%;
+}
+.album6 .left .top img {
+  width: 100%;
+  height: 100%;
+}
+.album6 .left .bottom {
+  width: 100%;
+  height: 33.33333333%;
+  font-size: 0;
+}
+.album6 .left img {
+  width: 50%;
+  height: 100%;
+}
+.album6 .right {
+  position: absolute;
+  width: 200px;
+  height: 100%;
+  top: 0;
+  right: 0;
+  font-size: 0;
+}
+.album6 .right img {
+  width: 100%;
+  height: 33.33333333%;
+  display: blcok;
+}

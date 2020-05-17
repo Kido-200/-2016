@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI组件之浮出层</title>
+    <style type="text/css">
+    *{
+        margin:0;
+        padding: 0;
+    }
+   
+    .layer{
+        position:fixed;
+        top:50%;
+        left:50%;
+        transform:translateX(-50%) translateY(-50%);
+        display:none;
+    }
+    #layer_title{
+        border:3px solid black;
+        color:#fff;
+        background-color: black;
+        padding: 8px 0;
+        text-indent:5px;
+    }
+    #confirm{
+        width: 100px;
+        position: absolute;
+        bottom: 10px;
+        right:calc(10% + 120px);
+        border: none;
+        padding: 5px;
+        background-color: rgba(200, 100, 100, .7);
+        cursor: pointer;
+    }
+    #cancel{
+        width: 100px;
+        position: absolute;
+        bottom: 10px;
+        right:calc(10%);
+        border: none;
+        padding: 5px;
+        background-color: rgba(200, 100, 100, .7);
+        cursor: pointer;   
+         }
+    #txtarea{
+        background-color: #fff;
+        color: #000;
+        border-top: none;
+        text-indent: 5px;
+        border: 1px solid #000;
+        min-width:302px;
+        min-height:202px;
+        padding: 10px;
+    }
+    #wrapper{
+        width: 100%;
+        height:200px;
+        position: absolute;
+        top: 0px ;
+        left : 0px;
+         
+        background-color: rgba(133,133,133,0.5);
+        /* 加透明度，使后面的东西能显现，就是遮罩层作业 */
+        display:none;
+        /* 这样只能实现占满屏幕，一滑滑动条就不行了 */
+        /* 用JS去=body.height */
+    }
+    </style>
+</head>
+<body>
+    <div id="wrapper"></div>
+
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <div class="layer" id="layer"> <!-- 放浮出层，平常display:none -->
+        <p id="layer_title">这是浮出层标题</p>
+        <textarea placeholder="这是一个浮出层" id="txtarea" readonly="readonly"></textarea>
+        <div class="btn">
+            <input type="button" value="确定" id="confirm">
+            <input type="button" value="取消" id="cancel">
+        </div>
+    </div>
+    <input type="button" id="test1" value="测试可拖动浮出层">
+    <input type="button" id="test2" value="测试可缩放浮出层">
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <p>正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本正常文本</p>
+    <br>
+    <script type="text/javascript">
+    var wrapper = document.getElementById("wrapper");
+    var layer = document.getElementById("layer");
+    var btn = document.getElementsByTagName("input");
+    btn[2].addEventListener("click",function(){
+        layer.style.display="block";
+        wrapper.style.display="block";
+        wrapper.style.height = document.body.scrollHeight+"px";
+    
+        layer.onmousedown = function(e){//开启拖动
+
+            var disX = e.pageX - layer.offsetLeft;
+            var disY = e.pageY - layer.offsetTop;
+            console.log(layer.style.left);
+            //鼠标距离div左边和上边的距离
+            document.onmousemove = function(e){
+                var event = e || window.event;
+                event.preventDefault();//不关的话会拖拽选中文字
+                layer.style.left = e.pageX - disX +"px";
+                layer.style.top = e.pageY - disY + "px";
+            }
+            document.onmouseup = function(){
+                document.onmousemove = null;
+            }
+        }
+
+    },false);
+    btn[3].addEventListener("click",function(){
+        layer.style.display="block";
+        wrapper.style.display="block";
+        wrapper.style.height = document.body.scrollHeight+"px";
+    },false);
+    btn[0].addEventListener("click",function(){
+       alert("你点击了确定");
+       down();
+    },false);
+    btn[1].addEventListener("click",function(){
+       alert("你点击了取消");
+       down();
+    },false);
+    
+    function down(){
+        layer.onmousedown=null;
+        layer.style.display="none";
+        wrapper.style.display="none";
+    }
+    wrapper.onmousedown = function(){
+        down();
+    }
+    </script>
+</body>
+</html>

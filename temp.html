@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Carousel</title>
+	<style>
+		*{
+			margin:0;
+			padding: 0;
+		}
+		.app{
+			width:100%;
+		}
+		.container{
+			margin:0 200px;
+		}
+		.jumbotron-heading{
+			padding:50px 60px;
+			background-color: gray;
+		}
+		.jumbotron-heading  p{
+			margin-bottom: 20px;
+		}
+		.card{
+			float:left;
+			width:31%;
+			padding: .75rem;
+			margin-bottom: 2rem;
+			border: 1px solid #efefef;
+			text-align: center;
+			
+		}
+		.card > img{
+			margin-bottom: .75rem;
+			border-radius: 100px;
+		}
+		.clearfix::before,.clearfix::after{
+			content:"";
+			display: table;
+			clear:both;
+		}
+	</style>
+</head>
+<body>
+    <div id="app">
+		<div class="container ">
+			<section class="jumbotron-heading">
+				<div>
+					<p>Search Github Users</p>
+					<input type="text" placeholder="enter the name you search" />
+					<button >Search</button>
+				</div>
+			</section>
+			<div class="row clearfix">
+				<div class="card">
+					<a href="http://github.com/reactjs" target="_blank"></a>
+					<img src="img/43/01.jpg" style="width:100px;height:100px"/>
+					<p class="card-text">reactjs</p>
+				</div>
+				<div class="card">
+					<a href="http://github.com/reactjs" target="_blank"></a>
+					<img src="img/43/01.jpg" style="width:100px;height:100px"/>
+					<p class="card-text">reactjs</p>
+				</div>
+				<div class="card">
+					<a href="http://github.com/reactjs" target="_blank"></a>
+					<img src="img/43/01.jpg" style="width:100px;height:100px"/>
+					<p class="card-text">reactjs</p>
+				</div>
+				<div class="card">
+					<a href="http://github.com/reactjs" target="_blank"></a>
+					<img src="img/43/01.jpg" style="width:100px;height:100px"/>
+					<p class="card-text">reactjs</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

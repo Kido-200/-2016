@@ -1,0 +1,82 @@
+.part1 thead th {
+  background-color: #56f0d5;
+  font-weight: bold;
+}
+.part1 tbody tr:first-of-type,
+.part1 tbody tr:nth-of-type(2),
+.part1 tbody tr:nth-of-type(3) {
+  color: red;
+  font-weight: bold;
+}
+.part2 {
+  margin-top: 30px;
+}
+.part2 input {
+  width: 100px;
+  border: 1px solid #b1ffb1;
+  text-indent: 5px;
+  transition: all 1s;
+}
+.part2 input:focus {
+  width: 200px;
+  border: 1px solid #56f0d5;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+.part3 {
+  position: relative;
+  height: 200px;
+  width: 400px;
+}
+.part3 ul {
+  list-style: none;
+}
+.part3 .btn {
+  position: absolute;
+  bottom: 0;
+  left: 160px;
+  z-index: 5;
+  margin: 0;
+  padding: 0;
+}
+.part3 .btn li {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-color: rgba(177, 255, 177, 0.6);
+  text-align: center;
+  line-height: 30px;
+}
+.part3 .pic {
+  padding: 0;
+  height: 200px;
+}
+.part3 .pic li {
+  position: absolute;
+}
+.part3 .pic li:first-child {
+  background-color: red;
+}
+.part3 .pic li:nth-child(2) {
+  background-color: blue;
+}
+.part3 .pic li:nth-child(3) {
+  background-color: green;
+}
+.part3 .pic li:first-child,
+.part3 .pic li:nth-child(2) {
+  width: 400px;
+  height: 100%;
+  display: none;
+}
+.part3 .pic li:nth-child(3) {
+  width: 400px;
+  height: 100%;
+  display: block;
+}
+.part3 .pic li:target {
+  display: block;
+  z-index: 2;
+}

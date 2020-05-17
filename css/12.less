@@ -1,0 +1,96 @@
+.part1{
+	thead{
+		th{
+			background-color:#56f0d5;
+			font-weight:bold;
+		}
+	}
+	tbody{
+		 tr:first-of-type,
+		 tr:nth-of-type(2),
+		 tr:nth-of-type(3){
+			 color:red;
+			 font-weight: bold;
+		 }
+	}
+}
+.part2{
+	margin-top:30px;
+	input{
+		width:100px;
+		border: 1px solid #b1ffb1;
+		text-indent:5px;
+		transition:all 1s;
+	}
+	input:focus{
+		width:200px;
+		border: 1px solid #56f0d5;
+		
+	}
+}
+a{
+	text-decoration: none;
+	color:black;
+}
+.part3{
+	position:relative;
+	height:200px;
+	// background-color: red;
+	width:400px;
+	ul{
+		list-style: none;
+		
+	}
+	.btn{
+		
+		position:absolute;
+		bottom:0;
+		left:160px;
+		z-index:5;
+		margin:0;
+		padding: 0;
+		
+		li{
+			display: inline-block;
+			width: 30px;
+			height: 30px;
+			background-color: rgba(177, 255, 177, .6);
+			text-align: center;
+			line-height: 30px;
+		}
+	}
+	.pic{
+		padding: 0;
+		height: 200px;
+		li{
+			position: absolute;//并且3开启block，防止第一次点击不显示图片
+		}
+		li:first-child {
+		    background-color: red;
+		}
+		
+		li:nth-child(2) {
+		    background-color: blue;
+		}
+		
+		li:nth-child(3) {
+		    background-color: green;
+		}
+		li:first-child,
+		li:nth-child(2)
+		{
+			width:400px;
+			height:100%;
+			display:none;
+		}
+		li:nth-child(3){
+			width:400px;
+			height:100%;
+			display:block;
+		}
+		li:target{
+			display:block;
+			z-index: 2;//开绝对定位，后面出现就能遮住前面的
+		}
+	}
+}

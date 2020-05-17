@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>定位和居中问题</title>
+		<!-- 注意测试不同情况，尤其是极端情况下的效果。
+		调节浏览器宽度，灰色元素始终水平居中。
+		调节浏览器高度，灰色元素始终垂直居中。
+		调节浏览器高度和宽度，黄色扇形的定位始终准确。 -->
+		<style type="text/css">
+			.wrapper{
+					position:absolute;
+					left:0;
+					right:0;
+					top:0;
+					bottom:0;
+					margin:auto;
+					width: 400px;
+					height: 200px;
+					background-color: #ccc;
+					overflow:hidden;
+			}
+			.ball{
+				background-color:orange;
+				border-radius:50%;
+				width:100px;
+				height:100px;
+				position:relative;
+			}
+			.left{
+				left:-50px;
+				top:-50px;
+			}
+			.right{
+				left:350px;
+				top:50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="ball left"></div>
+			<div class="ball right"></div>
+		</div>
+	</body>
+</html>

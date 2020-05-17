@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>task 18</title>
+		<style type="text/css">
+            body{
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+                margin:20px;
+                padding:20px;
+            }
+            textarea{
+                width:100%;
+                font-size:20px;
+            }
+            input{
+                border:1px #ff0000 solid;
+                background-color:#fff;
+                padding:20px;
+                cursor:pointer;
+                transition:all 0.5s;
+                border-radius:15px;
+                font-size:15px;
+
+            }
+            input:hover{
+                background-color: rgba(255, 0, 0, 0.7);
+            }
+            div{
+                width:100%;
+            }
+            li {
+                display: inline-block;
+                background-color: rgba(255, 0, 0, 0.5);
+                margin: 2px 2px;
+                border-radius: 15px;
+                padding: 7px;
+                color: #fff;
+                transition: all 1s;
+             }
+             li:hover{
+                 cursor:pointer;
+
+             }
+             ul{
+                 display:flex;
+                 flex-wrap:wrap;
+
+             }
+
+		</style>
+	</head>
+	<body>
+        <div>
+            <textarea name="text" col="100" rows="10" placeholder="批量输入多个内容，格式可以为数字、中文、英文等，可以通过用回车，逗号（全角半角均可），顿号，空格（全角半角、Tab等均可）等符号作为不同内容的间隔。"></textarea>
+            <input type="button" value = "左侧入">
+            <input type="button" value = "右侧入">
+            <input type="button" value = "左侧出">
+            <input type="button" value = "右侧出">
+            <input type="text" placeholder="输入想查询的标签名">
+            <input type="button" value = "查询">
+            <input type="button" value = "重置">
+        </div>
+		
+		<ul></ul>
+        <script type="text/javascript">
+        //学到的是可以把换行符之类的用非^来表示，用replace全换成空格，再转化成数组就舒服了
+			var input = document.getElementsByTagName("input");
+			var ul = document.getElementsByTagName("ul")[0];
+            var text = document.getElementsByTagName("textarea")[0];
+            input[5].addEventListener("click",function(){
+                var li = document.getElementsByTagName("li");
+                var inputText = input[4].value;
+                var len = li.length;
+                for(var i = 0 ; i < len;i++)
+                {
+                    //把之前查过的都变回正常颜色
+                    li[i].style.backgroundColor="";
+                    //因为这个是写在HTML的，CSS里还是有颜色的，所以可以直接写成这样,应该是表示不启用HTML里的修改背景颜色，即默认值了
+                    //而不是默认值的话，行内CSS优先级最高
+                    li[i].style.color="";
+                    if(inputText==li[i].innerHTML)
+                    {
+                        li[i].style.backgroundColor="#FFFF00";
+                        li[i].style.color="#000";
+                    }
+                }
+            },false);
+            input[6].addEventListener("click",function(){
+                ul.innerHTML="";
+                text.value="";
+                input[4].value="";
+            },false);
+			//左进
+			input[0].addEventListener("click",function(){
+                var value = getRegExp();
+                var len = value.length;
+                if(len>60)
+                {
+                    alert("最多输入60个");
+                    return;
+                }
+                for(var i = 0;i<len;i++)
+                {
+                    if(!value[i]) continue;
+                        var li = document.createElement("li");
+                        var textNode = document.createTextNode(value[i]);
+                        li.appendChild(textNode);
+                        li.setAttribute("title",value[i]);
+				        ul.insertBefore(li,ul.children[0]);//即使ul里面没children[0]也能插进去，牛逼
+                }
+               
+			
+			},false);
+			//右进
+			input[1].addEventListener("click",function(){
+                var value = getRegExp();
+                var len = value.length;
+                if(len>60)
+                {
+                    alert("最多输入60个");
+                    return;
+                }
+                for(var i = 0;i<len;i++)
+                {
+                    if(!value[i]) continue;
+
+                        var li = document.createElement("li");
+                        var textNode = document.createTextNode(value[i]);
+                        li.appendChild(textNode);
+                        li.setAttribute("title",value[i]);
+				        ul.appendChild(li);//即使ul里面没children[0]也能插进去，牛逼
+                }
+               
+			
+			},false);
+			//左退
+			input[2].addEventListener("click",function(){
+				alert("删除最左侧节点：" + ul.children[0].innerHTML);
+				ul.removeChild(ul.children[0]);
+			},false);
+			//右退
+			input[3].addEventListener("click",function(){
+				alert("删除最右侧节点：" +ul.children[ul.children.length - 1].innerHTML);
+				ul.removeChild(ul.children[ul.children.length - 1]);
+			},false);
+			//给所有li添加上点击就删除的事件， 很常见的给他们的父亲加个冒泡事件就完事儿了
+			ul.addEventListener("click",function(e){
+				var event = e||window.event;
+				var target = event.target||event.srcElement;
+				ul.removeChild(target);
+            },false);
+            //正则过滤,,返回一个数组
+            function getRegExp(){
+                //把不符合（包括换号符这些）的全部转换成空格,用split转成数组
+                var value = text.value.replace(/[^\d\u4e00-\u9fa5a-zA-Z]+/g," ").split(" ");
+                if(value[0]!=="")
+                {
+                    return value;
+                }
+                else{
+                    alert("输入点东西");
+                    return false;
+                }
+            }
+		</script>
+	</body>
+	
+</html>

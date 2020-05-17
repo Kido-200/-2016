@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>task 19</title>
+        <style type="text/css">
+        body{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            font-size:20px;
+
+        }
+			ul{
+				padding-left:0;
+                display:flex;
+                align-items:flex-end;
+			}
+			li{
+				display: inline-block;
+				 width: 15px;
+				 background-color: red;
+                 margin:0 1px;
+				 transition:all 0.5s;
+				 				 /* 让文字不显示 */
+
+				 text-indent:-9999px;
+			}
+			input{
+                cursor:pointer;
+                padding:20px;
+                border:1px #eee solid;
+                background-color:#fff;
+                border-radius:20px;
+                font-size:17px;
+
+            }
+            .wrapper{
+                margin:0 auto;
+            }
+           
+		</style>
+	</head>
+	<body>
+        <div class="wrapper">
+            <input type="text" placeholder="请输入10-100的数字">
+            <input type="button" value = "左侧入">
+            <input type="button" value = "右侧入">
+            <input type="button" value = "左侧出">
+            <input type="button" value = "右侧出">
+            <input type="button" value = "随机60个数字">
+            <input type="text" placeholder="排序速度，默认50">
+            <input type="button" value = "排序">
+            <input type="button" value = "刷新页面">
+        </div>
+		<p>step1、自主输入60个数字或者点"随机60个数字"</p>
+        <p>step2、填写排序速度，默认50（可选）</p>
+        <p>step3、点击“排序”按钮</p>
+        <p>注：重来请按“刷新页面”</p>
+		<ul></ul>
+		<script type="text/javascript">
+			var input = document.getElementsByTagName("input")[0];
+			var button = document.getElementsByTagName("input");
+            var ul = document.getElementsByTagName("ul")[0];
+            var numberStatus = 0;//判断是否使用随机生成60个数字
+			//左进
+			button[1].addEventListener("click",function(){
+				if(input.value==""||numberStatus) return false;
+				if(!validNum()){ return false;}
+				var value = input.value;
+				var len = ul.children.length;
+				if(len>=60){
+					alert("最多输入60个");
+					return;
+				}
+				var li = document.createElement("li");
+				var textNode = document.createTextNode(value);
+				li.appendChild(textNode);
+				ul.insertBefore(li,ul.children[0]);
+				li.style.height=value+"px";
+				li.setAttribute("title",value);
+			},false);
+			//右进
+			button[2].addEventListener("click",function(){
+				if(input.value==""||numberStatus) return false;
+				if(!validNum()){ return false;}
+				var value = input.value;
+				var len = ul.children.length;
+				if(len>=60){
+					alert("最多输入60个");
+					return;
+				}
+				var li = document.createElement("li");
+				var textNode = document.createTextNode(value);
+				li.appendChild(textNode);
+				ul.appendChild(li);
+				li.style.height=value+"px";
+				li.setAttribute("title",value);
+			},false);
+			//左退
+			button[3].addEventListener("click",function(){
+				alert("删除最左侧节点：" + ul.children[0].innerHTML);
+				ul.removeChild(ul.children[0]);
+			},false);
+			//右退
+			button[4].addEventListener("click",function(){
+				alert("删除最右侧节点：" +ul.children[ul.children.length - 1].innerHTML);
+				ul.removeChild(ul.children[ul.children.length - 1]);
+			},false);
+			//给所有li添加上点击就删除的事件， 很常见的给他们的父亲加个冒泡事件就完事儿了
+			ul.addEventListener("click",function(e){
+				var event = e||window.event;
+				var target = event.target||event.srcElement;
+				ul.removeChild(target);
+			},false);
+
+
+
+			function randomNum(){
+				var html = "";
+				if(numberStatus == 1){return false;}
+				for(var i = 1;i<40;i++)
+				{
+					var x = Math.floor(Math.random()*90+10);
+					html += "<li style='height:" + x + "px;width:15px;transition:all .5s;' title=" + x + ">" +x+ "</li>"; 
+				}
+				ul.innerHTML = html;
+				numberStatus = 1;
+			}
+			button[5].addEventListener("click",randomNum,false);
+			//看数字是否符合规范
+			function validNum(){
+				var num = input.value;
+				if(isNaN(num)||num<10||num>100){
+					alert("请输入10-100的数字。");
+					return false;
+				}
+				return true;
+			}
+
+			//
+			function sort(){
+				var li = ul.children,
+				len = li.length,
+				sortSpeed = 50,
+				inputSpeed=button[6].value;
+				//可视化实现目前感觉有两种方法，一种是写成递归函数用setTimeOut，直接insert（看起来是位置互换）
+				//第二种是跟第一种一样记录下每次交换他们的高度和数值（看起来是高度一个增高，一个降低）
+				//第三种是记录下每一次交换后的所有li的高度，然后去设置一个interval，
+				//函数每次都去让所有li的高度去等于我们记录下来的那个
+				if(inputSpeed.match(/^[1-9]\d+$/)){
+					sortSpeed=inputSpeed;
+				}
+				var i = 1,
+					j = 1;
+				li[1].style.backgroundColor="#00FF00";//变绿
+				setTimeout(timeout,sortSpeed);
+				//这个延迟函数只执行一次交换操作，这次交换完了
+				//他在内部再调换延迟函数，就实现了每次交换都是延迟的结果，就实现了可视化。
+				//就是把原来的2个for循环最里面那一层改写成了函数进行每次操作。
+				function timeout(){
+					if(i<len)
+					{
+						if(parseInt(li[j].innerHTML)>= parseInt(li[j-1].innerHTML))
+						{//已经比前面所有的大了
+							li[j].style.backgroundColor="red";
+							i++;
+							j=i;
+							li[i].style.backgroundColor="#00FF00";
+						}
+						else{
+							ul.insertBefore(li[j],li[j-1]);
+							if(j==1)
+							{//换完已经前面没东西了
+								li[0].style.backgroundColor="red";
+								 i++;
+								 j = i;
+								 li[i].style.backgroundColor="#00FF00";
+							}
+							else{
+								j--;
+							}
+						}
+						setTimeout(timeout,sortSpeed);
+					}
+					else{
+						return;
+					}
+				}
+				// for(var i = 1;i<len;i++)
+				// {
+				// 	li[i].style.backgroundColor="#00FF00";//变绿
+				// 	for(var j = i;j>0;j--)
+				// 	{
+				// 		if(parseInt(li[j].innerHTML)>= parseInt(li[j-1].innerHTML))
+				// 		{
+				// 			li[j].style.backgroundColor="red";
+				// 			break;
+				// 		}
+					
+				// 		ul.insertBefore(li[j],li[j-1]);
+				// 		if(j==1)
+				// 		{
+				// 			li[0].style.backgroundColor="red";
+				// 		}
+				// 	}
+				// }
+				
+			}
+			button[7].addEventListener("click",sort,false);
+			button[8].addEventListener("click",function(){location.reload();},false);
+			
+		</script>
+	</body>
+	
+</html>

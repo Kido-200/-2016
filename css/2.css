@@ -1,0 +1,148 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #DEDEDE;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+a:hover {
+  color: gray;
+}
+ul li {
+  list-style: none;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #333;
+}
+.header h1 {
+  color: white;
+}
+.header ul li {
+  display: inline-block;
+  margin-top: 10px;
+  margin-right: 5px;
+}
+.article {
+  margin: 25px;
+  padding: 25px;
+  background-color: white;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
+}
+.article h2 {
+  margin: 10px;
+}
+.article h3 {
+  margin: 10px;
+  color: #706B71;
+}
+.article span {
+  color: #939393;
+  margin: 10px;
+  font-size: 0.8rem;
+}
+.article p {
+  margin: 10px;
+}
+.article a {
+  color: blue;
+  text-decoration: underline;
+}
+.article a:hover {
+  color: grey;
+}
+.article img {
+  margin: 20px 0;
+}
+.picture .wrapper {
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px ;
+}
+.picture .wrapper img {
+  width: 128px;
+  height: 128px;
+  margin: 0;
+}
+.last ol {
+  margin: 20px;
+  margin-left: 30px;
+}
+.last table {
+  border-collapse: collapse;
+}
+.last table th {
+  width: 600px;
+  background-color: #333333;
+  color: white;
+  text-align: center;
+}
+.last table td {
+  width: 600px;
+  text-align: center;
+}
+.last table tfoot td {
+  background-color: #CCCCCC;
+}
+.form h2 {
+  color: #706B71;
+  font-size: 1.1rem;
+}
+.form form {
+  margin-left: 355px;
+}
+.form form p {
+  color: #939393;
+  font-size: 0.8rem;
+}
+.form form span {
+  color: black;
+  font-weight: bold;
+  font-size: 1rem;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.form form input {
+  margin-bottom: 10px;
+}
+.form form #tui {
+  margin-left: 2rem;
+}
+.form form #hint {
+  margin-left: 100px;
+  margin-top: 0;
+}
+.form form .self {
+  margin: 20px;
+  margin-left: 0;
+}
+.form form .self span {
+  vertical-align: top;
+  margin: 0;
+}
+.form form .self textarea {
+  width: 655px;
+  height: 140px;
+}
+.form form button {
+  display: block;
+  color: white;
+  width: 1200px;
+  margin-left: -250px;
+  margin-bottom: 10px;
+  height: 40px;
+  background-color: #3355D0;
+  border-radius: 15px;
+}
+.footer {
+  height: 50px;
+  color: #FFFFFF;
+  background-color: black;
+  line-height: 50px;
+  text-align: center;
+}

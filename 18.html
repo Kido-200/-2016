@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>task 18</title>
+		<style type="text/css">
+			ul{
+				padding-left:0;
+			}
+			li{
+				display: inline-block;
+				 width: 50px;
+				 height: 50px;
+				 line-height: 50px;
+				 text-align: center;
+				 background-color: red;
+				 color: #fff;
+			}
+			li:hover{
+				cursor:pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text">
+		<button type="button">左侧入</button>
+		<button type="button">右侧入</button>
+		<button type="button">左侧出</button>
+		<button type="button">右侧出</button>
+		<ul></ul>
+		<script type="text/javascript">
+			var input = document.getElementsByTagName("input")[0];
+			var button = document.getElementsByTagName("button");
+			var ul = document.getElementsByTagName("ul")[0];
+			input.addEventListener("blur",function(){
+				if(!input.value.match(/^\d+$/))
+				{
+					alert("请输入数字");
+					input.value="";
+				}
+			},false);
+			//左进
+			button[0].addEventListener("click",function(){
+				if(input.value=="") return false;
+				var li = document.createElement("li");
+				var textNode = document.createTextNode(input.value);
+				li.appendChild(textNode);
+				ul.insertBefore(li,ul.children[0]);//即使ul里面没children[0]也能插进去，牛逼
+			},false);
+			//右进
+			button[1].addEventListener("click",function(){
+				if(input.value=="") return false;
+				var li = document.createElement("li");
+				var textNode = document.createTextNode(input.value);
+				li.appendChild(textNode);
+				ul.appendChild(li);//即使ul里面没children[0]也能插进去，牛逼
+			},false);
+			//左退
+			button[2].addEventListener("click",function(){
+				alert("删除最左侧节点：" + ul.children[0].innerHTML);
+				ul.removeChild(ul.children[0]);
+			},false);
+			//右退
+			button[3].addEventListener("click",function(){
+				alert("删除最右侧节点：" +ul.children[ul.children.length - 1].innerHTML);
+				ul.removeChild(ul.children[ul.children.length - 1]);
+			},false);
+			//给所有li添加上点击就删除的事件， 很常见的给他们的父亲加个冒泡事件就完事儿了
+			ul.addEventListener("click",function(e){
+				var event = e||window.event;
+				var target = event.target||event.srcElement;
+				ul.removeChild(target);
+			},false);
+		</script>
+	</body>
+	
+</html>

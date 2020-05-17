@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+    p{
+        font-size:.8rem;
+        color:#888;
+        display:inline-block;
+    }
+    p[class="rules"] {
+        color: #888;
+    }
+    p[class="fail"]{
+        color:#f00;
+    }
+    input[class="fail"]{
+        border: 2px solid #f00;
+    }
+    p[class="success"]
+    {
+        color: #0f0;
+    }
+    input[class="rules"]
+    {
+        border:1px solid #888;
+    }
+    input[class="success"]{
+        border: 2px solid #0f0;
+    }
+    /* div{
+        margin:auto;
+    } */
+    .factory{
+        border: 5px solid gray;
+        margin: 40px 20px;
+    }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="checkbox_name" value="checkbox_name" checked="checked" disabled="disabled">
+    <label for="checkbox_name">账号</label>
+    <input type="checkbox" id="checkbox_password" value="checkbox_password" checked="checked" disabled="disabled">
+    <label for="checkbox_password">密码</label>
+    <input type="checkbox" id="checkbox_password_confirm" value="checkbox_password_confirm" checked="checked" disabled="disabled">
+    <label for="checkbox_password_confirm">确认密码</label>
+    <input type="checkbox" id="checkbox_email" value="checkbox_email">
+    <label for="checkbox_email">邮箱</label>
+    <input type="checkbox" id="checkbox_phone" value="checkbox_phone">
+    <label for="checkbox_phone">邮箱</label>
+    <input type="button" id="create" value="创建表单">
+    <input type="button" id="reset" value="重置">
+    <form action="#" id="form"></form>
+    <script type="text/javascript">
+        class FormFactory{//input框 rules为后面的p标签内容，success和fail对应blur后的p的innerHTML
+            constructor(name,type,func,rules,success,fail){
+                this.label = name;
+                this.type = type;
+                this.validator = func;
+                this.rules = rules;
+                this.success = success;
+                this.fail = fail;
+            }
+        }
+        function getLength(str){
+            var sum = 0;
+            for(var i = 0;i<str.length;i++)
+            {
+                char_code = str.charCodeAt(i);
+                if(char_code>=0&&char_code<=128)
+                    sum++;
+                else{
+                    sum+=2;
+                }
+
+            }
+            return sum;
+        }
+        //存验证input是否正确的各种函数
+        var CheckFactory = {
+            name:function(){
+                //如果value=""就别测了，防止一开始就满屏红
+                if(this.value=="") {
+                    this.nextElementSibling.innerHTML = name_input.rules;
+                    this.nextElementSibling.className="";
+                    this.className="";
+                    return;
+                };
+                var len = getLength(this.value);
+                if(len<4||len>16){
+                    this.setAttribute("class","fail");
+                    this.nextElementSibling.setAttribute("class","fail");
+                    this.nextElementSibling.innerHTML=name_input.fail;
+                }
+                else{
+                    this.nextElementSibling.setAttribute("class","success");
+                    this.nextElementSibling.setAttribute("class","success");
+                    this.nextElementSibling.innerHTML=name_input.success;
+                }
+            },
+            password:function(){
+                if(this.value=="") {
+                    this.nextElementSibling.innerHTML = name_input.rules;
+                    this.nextElementSibling.className="";
+                    this.className="";
+                }
+                else{
+                    this.nextElementSibling.setAttribute("class","success");
+                    this.setAttribute("class","success");
+                    this.nextElementSibling.innerHTML=password_input.success;
+                }
+            },
+            password_confirm:function(){
+                if(this.value=="") {
+                    this.nextElementSibling.innerHTML = name_input.rules;
+                    this.nextElementSibling.className="";
+                    this.className="";
+                }
+                else if(this.parentNode.previousSibling.childNodes[1].value != this.value){
+                    this.setAttribute("class","fail");
+                    this.nextElementSibling.setAttribute("class","fail");
+                    this.nextElementSibling.innerHTML=password_input.fail;
+                }
+                else{
+                    this.setAttribute("class","success");
+                    this.nextElementSibling.setAttribute("class","success");
+                    this.nextElementSibling.innerHTML=password_input.success;
+                }
+            },
+            email:function(){
+                if(this.value=="") {
+                    this.nextElementSibling.innerHTML = name_input.rules;
+                    this.nextElementSibling.className="";
+                    this.className="";
+                    return;
+                }
+                var reg=/^\w+@\w+.\w{2,6}$/;
+                if(reg.test(this.value)){
+                    this.nextElementSibling.setAttribute("class", "success");
+                        this.setAttribute("class", "success");
+                        this.nextElementSibling.innerHTML = email_input.success;
+                }
+                else{
+                    this.nextElementSibling.setAttribute("class", "fail");
+                        this.setAttribute("class", "fail");
+                        this.nextElementSibling.innerHTML = email_input.fail;
+                }
+            },
+            phone:function(){
+                if(this.value==""){
+                    this.nextElementSibling.innerHTML = name_input.rules;
+                    this.nextElementSibling.className="";
+                    this.className="";
+                    return;
+                }
+                var reg = /^1\d{10}$/;
+                if(reg.test(this.value)){
+                    this.nextElementSibling.setAttribute("class", "success");
+                        this.setAttribute("class", "success");
+                        this.nextElementSibling.innerHTML = phone_input.success;
+                }
+                else{
+                    this.nextElementSibling.setAttribute("class", "fail");
+                        this.setAttribute("class", "fail");
+                        this.nextElementSibling.innerHTML = phone_input.fail;
+                }
+            }
+        }
+        var name_input = new FormFactory("name","text",CheckFactory.name,"必填，长度为4-16个字符", "名称格式正确", "长度只能为为4~16个字符");
+        var password_input = new FormFactory("passport","passport",CheckFactory.password,"请输入密码", "密码可用", "请输入密码");
+        var password_confirm_input = new FormFactory("passport_confirm","passport",CheckFactory.password_confirm,"再次输入相同的密码", "密码输入一致", "密码输入不一致");
+        var email_input = new FormFactory("email","email",CheckFactory.email,"输入您的邮箱", "邮箱格式正确", "邮箱格式错误");
+        var phone_input = new FormFactory("phone","text",CheckFactory.phone,"输入您的手机号码", "手机格式正确", "手机格式错误");
+        var inputArray = [name_input,password_input,password_confirm_input,email_input,phone_input];
+        //存所有label
+        var labelTranslate = {
+            name:"名称",
+            password:"密码",
+            password_confirm:"确认密码",
+            email:"邮箱",
+            phone:"手机号码"
+        }
+        var checkboxArray = ["checkbox_name", "checkbox_password", "checkbox_password_confirm", "checkbox_email", "checkbox_phone"];
+        var form = document.getElementById("form");
+        var count=1;
+        //当创建表单被点击，把表单创造出来并放到页面
+        var renderForm = function(){
+            var wrapper = document.createElement("div");
+            wrapper.setAttribute("class","factory");
+            for(var i = 0;i<checkboxArray.length;i++)//一一对应inputArray,天才
+            {//找一下哪些是打勾的
+                if(document.getElementById(checkboxArray[i]).checked ==true){
+                    var checked_name = checkboxArray[i].slice(9);
+                    var div = document.createElement("div");
+                    var label = document.createElement("label");
+                    label.innerHTML=labelTranslate[checked_name];
+                    label.for="input"+count;
+                    var input = document.createElement("input");
+                    input.id= "input"+count;
+                    input.type=inputArray[i].type;
+                    input.setAttribute("class",inputArray[i].class);
+                    input.onblur = inputArray[i].validator;//加上检验方法
+                    count++;
+                    var p = document.createElement("p");
+                    p.innerHTML=inputArray[i].rules;
+                    div.appendChild(label);
+                    div.appendChild(input);
+                    div.appendChild(p);
+                    wrapper.appendChild(div);
+                }
+            }
+            form.appendChild(wrapper);
+        }
+        document.getElementById("create").addEventListener("click",renderForm,false);
+        document.getElementById("reset").addEventListener("click",function(){location.reload();},false);
+        //location.reload()刷新页面
+    </script>
+</body>
+</html>

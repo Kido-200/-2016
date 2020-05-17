@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>task03 三栏式布局</title>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+				
+			}
+			img{
+				width:80px;
+				margin-right:10px;
+				height:80px;
+				float:left;
+				/*这里如果不写transtion，hover完了是0秒直接恢复，导致看不到鼠标移出后动画*/
+				transition: all .5s;
+			}
+			.img_wrapper{
+				border: 1px solid #999;
+				background-color:white;
+				padding:15px;
+			}
+			.wrapper{
+				display:flex;
+				justify-content:space-between;
+				margin:20px;
+				padding:20px;
+				background-color:rgba(0,0,0,.3);
+			}
+			.left,.right,.mid{
+				margin: 0 10px;
+				padding:10px;
+			}
+			.right{
+				width:100px;
+				order:3;
+			}
+			.right .img_wrapper{
+				padding-top:0;
+				width: 80px;
+			}
+			.right img{
+				display: block;
+				float:none;
+				margin-top:10px;
+			}
+			.mid{
+				background-color: white;
+				border: 1px solid #999;
+				order:2;
+			}
+			.left{
+				 width: 200px;
+				 order:1;
+			}
+			
+			.left .img_wrapper{
+				width:160px;
+			}
+			img:hover{
+			 transform: rotate3d(20, 20,20, 360deg); 
+			transition: all .5s;
+        
+
+			}
+		
+			
+			.clearfix:before,.clearfix:after{
+			content:"";
+			display: table;
+			clear:both;
+			}
+		
+		</style>
+	</head>
+	<body>
+		 <div class="wrapper">
+			 <div class="mid">
+			 	  <span>关于我们的团队"TEAM CM"(code matters)<br>&nbsp;&nbsp;我们来自不同的省份，纵跨小半个中国；我们来自不同的大学，有二本院也有985、211的重点大学；我们各处不同的阶段，有大三狗也有研究生。但我们有着相同的目标，同样的理想。正是这份信念让我们有缘聚在一起，一起通过百度IFE学院锻炼自己的水平。<br>关于我们的团队"TEAM CM"(code matters)<br>&nbsp;&nbsp;我们来自不同的省份，纵跨小半个中国；我们来自不同的大学，有二本院也有985、211的重点大学；我们各处不同的阶段，有大三狗也有研究生。但我们有着相同的目标，同样的理想。正是这份信念让我们有缘聚在一起，一起通过百度IFE学院锻炼自己的水平。<br>关于我们的团队"TEAM CM"(code matters)<br>关于我们的团队"TEAM CM"(code matters)<br>&nbsp;&nbsp;我们来自不同的省份，纵跨小半个中国；我们来自不同的大学，有二本院也有985、211的重点大学；我们各处不同的阶段，有大三狗也有研究生。但我们有着相同的目标，同样的理想。正是这份信念让我们有缘聚在一起，一起通过百度IFE学院锻炼自己的水平。<br>关于我们的团队"TEAM CM"(code matters)<br>&nbsp;&nbsp;我们来自不同的省份，纵跨小半个中国；我们来自不同的大学，有二本院也有985、211的重点大学；我们各处不同的阶段，有大三狗也有研究生。但我们有着相同的目标，同样的理想。正是这份信念让我们有缘聚在一起，一起通过百度IFE学院锻炼自己的水平。<br>关于我们的团队"TEAM CM"(code matters)<br>关于我们的团队"TEAM CM"(code matters)<br>&nbsp;&nbsp;我们来自不同的省份，纵跨小半个中国；我们来自不同的大学，有二本院也有985、211的重点大学；我们各处不同的阶段，有大三狗也有研究生。但我们有着相同的目标，同样的理想。正是这份信念让我们有缘聚在一起，一起通过百度IFE学院锻炼自己的水平。<br>关于我们的团队"TEAM CM"(code matters)<br>&nbsp;&nbsp;我们来自不同的省份，纵跨小半个中国；我们来自不同的大学，有二本院也有985、211的重点大学；我们各处不同的阶段，有大三狗也有研究生。但我们有着相同的目标，同样的理想。正是这份信念让我们有缘聚在一起，一起通过百度IFE学院锻炼自己的水平。<br>关于我们的团队"TEAM CM"(code matters)<br>关于我们的团队"TEAM CM"(code matters)<br>&nbsp;&nbsp;我们来自不同的省份，纵跨小半个中国；我们来自不同的大学，有二本院也有985、211的重点大学；我们各处不同的阶段，有大三狗也有研究生。但我们有着相同的目标，同样的理想。正是这份信念让我们有缘聚在一起，一起通过百度IFE学院锻炼自己的水平。<br>关于我们的团队"TEAM CM"(code matters)<br>&nbsp;&nbsp;我们来自不同的省份，纵跨小半个中国；我们来自不同的大学，有二本院也有985、211的重点大学；我们各处不同的阶段，有大三狗也有研究生。但我们有着相同的目标，同样的理想。正是这份信念让我们有缘聚在一起，一起通过百度IFE学院锻炼自己的水平。<br>关于我们的团队"TEAM CM"(code matters)<br>关于我们的团队"TEAM CM"(code matters)<br>&nbsp;&nbsp;我们来自不同的省份，纵跨小半个中国；我们来自不同的大学，有二本院也有985、211的重点大学；我们各处不同的阶段，有大三狗也有研究生。但我们有着相同的目标，同样的理想。正是这份信念让我们有缘聚在一起，一起通过百度IFE学院锻炼自己的水平。<br>关于我们的团队"TEAM CM"(code matters)<br>&nbsp;&nbsp;我们来自不同的省份，纵跨小半个中国；我们来自不同的大学，有二本院也有985、211的重点大学；我们各处不同的阶段，有大三狗也有研究生。但我们有着相同的目标，同样的理想。正是这份信念让我们有缘聚在一起，一起通过百度IFE学院锻炼自己的水平。<br>关于我们的团队"TEAM CM"(code matters)<br><br></span>
+			 </div>
+			 <div class="left ">
+				 <div class="img_wrapper clearfix">
+					 <img src="img/QQ.jpg" >
+					 <span>TEAM CM</span>
+				 </div>
+				
+			 </div>
+			
+			 <div class="right">
+				 <div class="img_wrapper">
+				 <img src="img/QQ.jpg" >
+				 <img src="img/QQ.jpg" >
+				 <img src="img/QQ.jpg" >				
+				 </div>
+				 
+			 </div>
+		 </div>
+		  
+		  
+	</body>
+</html>

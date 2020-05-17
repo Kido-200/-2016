@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+    *{
+        margin:0;
+        padding: 0;
+    }
+   
+    table{
+        border-spacing: 0;
+        border-collapse:0;
+    }
+    td{
+        border:1px solid #eee;
+        width:50px;
+        height:50px;
+        text-align:center;
+        font-weight: bold;
+        box-sizing:border-box;
+    }
+    .blank{
+        border:none;
+    }
+    #robot-box{
+        background:url(./img/QQ.jpg) no-repeat;
+        background-size: contain;
+        width:50px;
+        height:50px;
+        position:absolute;
+        top:50px;
+        left:50px;
+        transition: all 1s;
+    }
+    ul{
+        font-size:1.5rem;
+    }
+    #command-part-display{
+        display:flex;
+    }
+    #command-part{
+        width:340px;
+    }
+    #command-part-button{
+        display:flex;
+        justify-content: space-around;
+    }
+    #command-part-button input{
+        background-color:#6289AF;
+        border:none;
+        color:white;
+        padding: 5px 10px;
+        cursor:pointer;
+        border:none;
+
+    }
+    #command-part{
+        margin:10px;
+    }
+    #command_input{
+        width:300px;
+        height:500px;
+        color: rgb(0, 255, 0);
+        background-color:#34495E;
+        border:none;
+        font-size:30px;
+        line-height: 30px;
+    }
+    #command_display_count{
+        background-color:#2C3E50;
+        color:white;
+        height:500px;
+        width:40px;
+    }
+    #command_display_count li{
+        text-align:center;
+        line-height: 32px;
+    }
+    .wrapper{
+        display:flex;
+    }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <table>
+            <tr>
+                <td class="blank"></td>
+                <td class="blank">1</td>
+                <td class="blank">2</td>
+                <td class="blank">3</td>
+                <td class="blank">4</td>
+                <td class="blank">5</td>
+                <td class="blank">6</td>
+                <td class="blank">7</td>
+                <td class="blank">8</td>
+                <td class="blank">9</td>
+                <td class="blank">10</td>
+            </tr>
+            <tr>
+                <td class="blank">1</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="blank">2</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="blank">3</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="blank">4</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="blank">5</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="blank">6</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="blank">7</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="blank">8</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="blank">9</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="blank">10</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <div id="command-part">
+            <div id="command-part-button">
+                <input type="button" id="command_button" value="执行">
+                <input type="button" id="clean_button" value="清空">
+                <input type="button" id="refresh_button"  value="刷新">
+            </div>
+           <div id="command-part-display">
+                <ul id="command_display_count">
+                </ul>
+                <textarea name="text" id="command_input"></textarea>
+           </div>
+    
+    
+        </div>
+    </div>
+   
+   
+    <ul>
+        <li>
+            "支持大小写混写，但书写必需规范化。"
+            <br>
+            "PS：n如果为空，则默认为1。"
+        </li>
+        <br>
+        <li>
+            新增上下左右键输出TRA的命令
+        </li>
+        <br>
+        <li>GO：确认按钮，不填任何指令则默认向头顶朝的方向前进一格</li>
+        <li>TUN LEF：向左转（逆时针旋转90度）</li>
+        <li>TUN RIG：向右转（顺时针旋转90度）</li>
+        <li>TUN BAC：向右转（旋转180度）</li>
+        <li>TRA LEF：向屏幕的左侧移动一格，方向不变</li>
+        <li>TRA TOP：向屏幕的上面移动一格，方向不变</li>
+        <li>TRA RIG：向屏幕的右侧移动一格，方向不变</li>
+        <li>TRA BOT：向屏幕的下面移动一格，方向不变</li>
+        <li>MOV LEF：方向转向屏幕左侧，并向屏幕的左侧移动一格</li>
+        <li>MOV TOP：方向转向屏幕上面，向屏幕的上面移动一格</li>
+        <li>MOV RIG：方向转向屏幕右侧，向屏幕的右侧移动一格</li>
+        <li>MOV BOT：方向转向屏幕下面，向屏幕的下面移动一格</li>
+    </ul>
+    <script type="text/javascript">
+    // var robot = document.getElementById("robot_box");
+    var cmd_btn = document.getElementById("command_button");
+    var command_input = document.getElementById("command_input");
+    document.getElementById('command_input').value = 'MOV RIG 3 \nmoV bot 3\nMOV lef 1\ntra bot 2';
+    updateLineNum();
+    class RobotBox {
+        constructor(){
+            this.deg = 0;
+            this.face = 0;
+            this.xPos = 50;
+            this.yPos = 50;
+            this.robot =  document.createElement("div");
+        }
+        turnLeft(){
+            this.deg -= 90;
+            this.robot.style.transform =  "rotateZ(" +this.deg + "deg)";
+            this.face=(this.face+4-1)%4;
+        }
+        turnRight(){
+            this.deg+=90;
+            this.robot.style.transform = "rotateZ("+this.deg+"deg)";
+            // this.robot.style="transform: rotateZ(90deg);background-color:red;";
+            //这样直接修改style才需要写；
+            //rotateZ里面不能写;  因为我们修改的是transform
+            //style="transform: rotateZ(90deg);"自动添加;
+            this.face=(this.face+1)%4;
+        }
+        turnBack(){
+            this.deg+=180;
+            this.robot.style.transform = "rotateZ("+this.deg+"deg)";
+            this.face=(this.face+2)%4;
+        }
+        tra_lef(){
+            if(this.xPos-50>=50)
+                     {
+                         this.xPos-=50;
+                         this.robot.style.left = this.xPos+"px";
+                     }
+        }
+        tra_top(){
+            if(this.yPos-50>=50)
+                    {
+                        this.yPos-=50;
+                        this.robot.style.top = this.yPos+"px";
+                    }
+        }
+        tra_rig(){
+            if(this.xPos+50<=500)
+                    {
+                        this.xPos+=50;
+                        this.robot.style.left = this.xPos+"px";
+                    }
+        }
+     tra_bot(){
+        if(this.yPos+50<=500)
+                    {
+                        this.yPos+=50;
+                        this.robot.style.top = this.yPos+"px";
+                    }
+         }
+
+        go(str,line_num){
+            var command_input = str;
+            var Li = document.getElementById('command_display_count').getElementsByTagName("li");
+            Li[line_num].style.borderRadius="10px";
+            Li[line_num].style.backgroundColor="rgb(127, 173, 218)";
+            if(command_input=="TUN LEF")
+            {
+                this.turnLeft();
+            }
+            else if(command_input=="TUN RIG"){
+                this.turnRight();
+            }
+            else if(command_input=="TUN BAG"){
+                this.turnBack();
+            }
+            else if(command_input=="")
+            {
+                if(this.face==0)
+                {
+                    if(this.yPos-50>=50)
+                    {
+                        this.yPos-=50;
+                        this.robot.style.top = this.yPos+"px";
+                    }
+                }
+                else if(this.face==1)
+                {
+                    if(this.xPos+50<=500)
+                    {
+                        this.xPos+=50;
+                        this.robot.style.left = this.xPos+"px";
+                    }
+                }
+                else if(this.face==2){
+                    if(this.yPos+50<=500)
+                    {
+                        this.yPos+=50;
+                        this.robot.style.top = this.yPos+"px";
+                    }
+                }
+                else if(this.face==3)
+                {
+                    if(this.xPos-50>=50)
+                    {
+                        this.xPos-=50;
+                        this.robot.style.left = this.xPos+"px";
+                    }
+                }
+            }
+            else if(command_input=="TRA LEF")
+            {
+               this.tra_lef();
+            }
+            else if(command_input=="TRA TOP")
+            {
+                this.tra_top();
+
+            }
+            else if(command_input=="TRA RIG")
+            {
+                this.tra_rig();
+
+            }
+            else if(command_input=="TRA BOT")
+            {
+                this.tra_bot();
+            }
+            else if(command_input=="MOV LEF")
+            {
+                if(this.xPos-50>=50)
+                    {
+                        this.xPos-=50;
+                        this.robot.style.left = this.xPos+"px";
+                        this.face=3;
+                        this.deg = -90;
+                        this.robot.style.transform="rotateZ(-90deg)"
+                        // this.robot.style.transform =  "rotateZ(" +-90 + "deg)";
+                    }
+            }
+            else if(command_input=="MOV TOP")
+            {
+                if(this.yPos-50>=50)
+                    {
+                        this.yPos-=50;
+                        this.robot.style.top = this.yPos+"px";
+                        this.face=0;
+                        this.deg = 0;
+                        this.robot.style.transform="rotateZ(0deg)"
+                    }
+            }
+            else if(command_input=="MOV RIG")
+            {
+                if(this.xPos+50<=500)
+                    {
+                        this.xPos+=50;
+                        this.robot.style.left = this.xPos+"px";
+                        this.face=1;
+                        this.deg = 90;
+                        this.robot.style.transform="rotateZ(90deg)"
+                    }
+            }
+            else if(command_input=="MOV BOT")
+            {
+                if(this.yPos+50<=500)
+                    {
+                        this.yPos+=50;
+                        this.robot.style.top = this.yPos+"px";
+                        this.face=2;
+                        this.deg = 180;
+
+                        this.robot.style.transform="rotateZ(180deg)"
+
+                    }
+            }
+            else{
+                alert("输入TUN LEF或TUN RIG或TUN BAG或不输入");
+            }
+        }
+        init(name){
+            this.robot.id=name;
+            document.body.appendChild(this.robot);
+        }
+    };
+    var robot = new RobotBox("robot-box");
+    robot.init("robot-box");
+    //创建行数标记
+    function renderLineNum(count){
+        var command_display_count = document.getElementById('command_display_count');
+        command_display_count.innerHTML="";
+        for(var i =1;i<=count;i++){
+            var li = document.createElement("li");
+            var txt=document.createTextNode(i);
+            li.appendChild(txt);
+            command_display_count.appendChild(li);
+        }
+    }
+    //检测键盘是否输入回车，实时更新lineNum
+    function updateLineNum(){
+            if(command_input.value.match(/\n/g))
+              renderLineNum(command_input.value.match(/\n/g).length+1);
+            else{
+                renderLineNum(1);
+            }
+    }
+    function enhanceCommand(str){
+        var filter = /\n/g;
+        var inputArr = str.split(filter);
+        return inputArr;
+    }
+    var conmmand_input;
+    var times;
+    //关键在命令执行时要一条条执行，等动画完了再进行下一条如何实现
+    //跟以前一样用递归实现，函数套函数
+    function render(){
+        var inputArr = enhanceCommand(command_input.value);
+        var x = 0;
+        (function bigLoop(){
+            if(x<inputArr.length){
+                var times = "";
+                if(inputArr[x].slice(0,2).toUpperCase()=="GO"){
+                    conmmand_input = "GO";
+                    times = inputArr[x].slice(3)?Number(inputArr[x].slice(3)):1;
+
+                }
+                else if(inputArr[x]=="")
+                {
+                    conmmand_input = "blank";
+                    times = 1;
+                }
+                else{
+                    conmmand_input = inputArr[x].slice(0,7);
+                    times = inputArr[x].slice(8)?Number(inputArr[x].slice(8)):1;
+                }
+                if(isNaN(times)){
+                    alert("次数输入有误");
+                    return;
+                }
+                var i =0;
+                //走n步再拆成递归n次,因为实际上每次都要走一次transform的动画
+                //所以必须要用递归了
+                finalLoop();
+                function finalLoop(){
+                    if(i<times){
+                        robot.go(conmmand_input.toUpperCase(),x);
+                        setTimeout(finalLoop,1000);
+                        i++;
+                    }
+                    else{//这一语句走完了，准备走下一语句
+                        x++;
+                        setTimeout(bigLoop,1000);
+                    }
+                }
+            }
+        })()
+    }
+    // cmd_btn.addEventListener("click",robot.go,false);
+    // t_left.addEventListener("click",robot.turnLeft,false);
+    // t_right.addEventListener("click",robot.turnRight,false);
+    // t_back.addEventListener("click",robot.turnBack,false);
+    //上面这种写法，会把RoboxBox的turnLeft作为t_left的触发事件,但触发该事件的是t_left
+    //相当于t_left.robot.turnLeft(),所以this指向t_left
+    //所以调用时t_left的this指向t_left,所以会疯狂报错
+    //两种解决方法，一种像下面，写成function然后robot.turnLeft()这样turnLeft的this指向robot
+    //第二种，RobotBox里的函数改成箭头函数写法()=>{}这样函数里的this永远指向RobotBox
+    cmd_btn.addEventListener("click",render,false);
+    document.getElementById("clean_button").addEventListener("click",function(){command_input.value="";},false);
+    document.getElementById("refresh_button").addEventListener("click",function(){location.reload();},false);
+   
+   document.onkeydown = function(e){
+    var event = e||window.event;
+        var code = event.which;
+        if(code==37)
+        {
+            robot.tra_lef();
+        }
+        else if(code==38)
+        {
+            robot.tra_top();
+        }
+        else if(code==39)
+        {
+            robot.tra_rig();
+        }
+        else if(code==40){
+            robot.tra_bot();
+        }
+        else if(code==13||code==8)//删除可能要少一行，回车要多一行,这两种情况调用
+        {
+            updateLineNum();
+        }
+   }
+    </script>
+</body>
+</html>

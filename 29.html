@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        body {
+        font-family: "Microsoft Yahei";
+        }
+        input[type="button"]{
+            border:none;
+            background-color: #2F79BA;
+            color:#fff;
+            border-radius:5px;
+            padding:10px 20px;
+            cursor:pointer;
+        }
+        input[type="text"]
+        {
+            padding: 7px;
+        }
+        p{
+            font-size:.8rem;
+            color:#BBB;
+            margin:0 0 0 38px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+    1.字符数为4~16位
+    2.每个英文字母、数字、英文符号长度为1
+    3.每个汉字，中文符号长度为2 
+    -->
+    <label for="name">名称</label>
+    <input type="text" id="name" >
+    <input type="button" id="validate" value="验证">
+    <p id="hint">必填，长度为4~16个字符</p>
+    <script type="text/javascript">
+        var text = document.getElementById("name");
+        var button = document.getElementById("validate");
+        var hint = document.getElementById("hint");
+        button.addEventListener("click",isRight,false);
+        function isRight()
+        {
+            if(text.value=="")
+            {
+                changeHint("姓名不能为空");
+            }
+            else if(getLength(text.value) < 4||getLength(text.value) > 16)
+            {
+                changeHint("长度只能为为4~16个字符");
+            }
+            else{
+                hint.innerHTML = "名称格式正确";
+                hint.style.color = "#0f0";
+                text.style.border = "2px solid #0f0";
+            }
+        }
+        function changeHint(str)
+        {
+            hint.innerHTML=str;
+            hint.style.color = "#f00";
+            text.style.border = "2px solid #f00";
+        }
+        function getLength(str)
+        {
+            var sum = 0;
+            for(var i = 0;i<str.length;i++)
+            {
+                char_code = str.charCodeAt(i);//取每个字符的charCode
+                if(char_code<=128)
+                {
+                    sum++;
+                }
+                else
+                  sum+=2;
+            }
+            return sum;
+        }
+    </script>
+</body>
+</html>

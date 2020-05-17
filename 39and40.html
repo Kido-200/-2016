@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        *{
+            margin:0;
+            padding: 0;
+        }
+        select{
+            width:60px;
+            border:2px solid #CCC;
+            margin: 5px;
+        }
+        select:nth-child(n+2){
+            width:40px;
+        }
+        p{
+            text-align:center;
+        }
+        .date{
+            display:block;
+            margin:10px auto;
+            width:320px;
+            height:30px;
+            line-height:30px;
+            text-indent:5px;
+            font-size:20px;
+            border:solid 2px #CCC;
+            border-radius:7px;
+            outline:none; 
+            /* 一点就出来那个方框就是这个outline */
+            transition:all 0.5s;
+
+        }
+        .date:focus{
+	        box-shadow:0 0 10px #CCC;
+        }
+        .cell{
+            border-radius:3px;
+            color:#BBB;
+            cursor:pointer;
+        }
+        .used{
+            background-color:#CCC;
+	        color:#555;
+        }
+        .active{
+            background: #306DAB;
+	        color:#BBB;
+        }
+        .cell:hover{
+            background-color:#777;
+	        color:#CCC;
+        }
+        .calendar{
+            width:300px;
+            margin:0 auto;
+            text-align:center;
+            padding: 10px;
+            border-radius:10px;
+            background-color:#EEE;
+	        border:1px solid #CCC;
+        }
+        .calendar table{
+            width:300px;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" class="date" data-calendar>
+    <p>下拉，日期界面均可选择日期</p>
+    <script type="text/javascript" src="js/Calendar.js"></script>
+    <script type="text/javascript">
+		var options = {
+		    'calendarClass': 'calendar',
+		    'inputClass': 'input',
+		    'cellClass': 'cell',
+		    'uesdClass': 'used',
+		}
+		new Calendar(options);
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+    *{
+        padding: 0;
+        margin:0;
+        
+    }
+    td:hover,th:hover{
+        background-color:#eee;
+    }
+    th{
+        background-color: #A768C7;
+        color: #fff;
+    }
+    span{
+        cursor:pointer;
+    }
+    div{
+        margin:50px;
+    }
+    table{
+        margin:0 auto;
+        /* table默认宽高尽量小，所以可以在width不设置的情况margin居中 */
+        text-align:center;
+        border-collapse: collapse;
+
+    }
+    </style>
+</head>
+<body>
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+    <script type="text/javascript" src="js/tableTool.js"></script>
+    <script type="text/javascript">
+        var table1 = new TableTool({
+            table_name:"table1",
+            table_head:["Name","Chinese","Computer","English"],
+            isSort:[0,1,1,1],
+            tbody_obj:{
+                1:["小明",20,90,40],
+                2: ["小红", 90, 60, 90],
+                3: ["小肛", 60, 100, 70],
+                4: ["小3", 30, 50, 10],
+                5: ["小鸟", 10, 20, 30]
+            },
+            tdWH:[200,50],
+            head_color:"#eee",
+            table_color:"#F8C0FF",
+            isFrozen:1
+
+        },'test1');
+        var table2 = new TableTool({
+        table_name: "table2",
+        table_head: ["Name", "Chinese", "Computer", "English"],
+        isSort: [0, 1, 1, 1],
+        tbody_obj: {
+            1: ["小2", 20, 90, 40],
+            2: ["小红", 90, 60, 90],
+            3: ["小4", 60, 100, 70],
+            4: ["小E", 60, 20, 70],
+            5: ["小W", 60, 100, 60],
+        },
+        tdWH: [200, 50],
+        head_color: "rgb(74,158,158)",
+        table_color: "rgb(28,170,125)",
+        isFrozen:0
+    },'test2')
+    var table3 = new TableTool({
+        table_name: "table3",
+        table_head: ["Name", "qwe", "ewq", "dsa"],
+        isSort: [0, 1, 1, 1],
+        tbody_obj: {
+            1: ["小1", 20, 90, 40],
+            2: ["小2", 90, 60, 90],
+            3: ["小3", 60, 100, 70],
+            4: ["小4", 60, 20, 70],
+            5: ["小5", 60, 100, 60],
+        },
+        tdWH: [200, 50],
+        head_color: "rgb(114,58,158)",
+        table_color: "rgb(28,70,125)",
+        isFrozen: 1
+    })
+    </script>
+</body>
+</html>

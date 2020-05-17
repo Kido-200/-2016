@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+    *{
+        padding: 0;
+        margin:0;
+
+    }
+        div{
+            width:300px;
+            margin:20px auto;
+        }
+        label{
+            display: block;
+        }
+        input{
+            width:300px;
+            padding: 5px;
+            height:30px;
+            box-sizing: border-box;
+        }
+        input[type="submit"]{
+            width:300px;
+            height:40px;
+            display: block;
+            margin:30px auto;
+            background-color: #2F79BA;
+            color:#fff;
+            border:none;
+            border-radius:5px;
+        }
+        p{
+            color: rgb(187, 187, 187);
+            margin: 10px 0 0 0;
+        }
+    </style>
+</head>
+<body>
+    <form action="#">
+        <div>
+            <label for="name">名称</label>
+            <input type="text" id="name" name="name">
+            <p>必填，长度为4~16个字符</p>
+        </div>
+        <div>
+            <label for="pass">密码</label>
+            <input type="password" id="pass" name="password">
+            <p>请输入密码</p>
+
+        </div>
+        <div>
+            <label for="passtwo">密码确认</label>
+            <input type="password" id="passtwo" name="passwordtwo">
+            <p>请再此输入相同密码</p>
+
+        </div>
+        <div>
+            <label for="email">邮箱</label>
+            <input type="text" id="email" name="email">
+            <p>输入您的邮箱</p>
+
+        </div>
+        <div>
+            <label for="phone">手机</label>
+            <input type="text" id="phone" name="phone">
+            <p>输入您的手机号码</p>
+        </div>
+        <input type="submit" value="提交" id="submit">
+    </form>
+    <script type="text/javascript">
+    var name1 = document.getElementById("name");
+    var pass1 = document.getElementById("pass");
+    var pass2 = document.getElementById("passtwo");
+    var email = document.getElementById("email");
+    var phone = document.getElementById("phone");
+    var submit = document.getElementById("submit");
+    name1.addEventListener("blur",nameIsRight,false);
+    pass1.addEventListener("blur",function(){
+        if(pass1.value=="")
+        {
+            changeRed(pass1.nextElementSibling,"请输入密码");
+        }
+        else {
+            OK(pass1,"密码可用");
+        }
+    },false);
+    pass2.addEventListener("blur",function(){
+        if(pass2.value==pass1.value1)
+        {
+            OK(pass1,"密码正确");
+        }
+        else{
+            changeRed(pass2.nextElementSibling,"与上次密码不同");
+        }
+    },false);
+    email.addEventListener("blur",function(){
+        if(email.value=="")
+        {
+            changeRed(email.nextElementSibling,"请输入邮箱");
+        }
+        else{
+            var reg = /^[0-9a-zA-Z]\w+@\w+.[0-9a-zA-Z]{2,6}$/;
+           if(reg.test(email.value))
+           {
+               OK(email,"格式正确");
+           }
+           else{
+            changeRed(email.nextElementSibling,"邮箱格式错误");
+           }
+        }
+    },false);
+    phone.addEventListener("blur",function(){
+        if(phone.value==""){
+            changeRed(phone.nextElementSibling,"号码不能为空");
+            return;
+        }
+        var reg = /^\d{11}$/;
+        if(reg.test(phone.value))
+        {
+            OK(phone,"格式正确");
+        }
+        else{
+            changeRed(phone.nextElementSibling,"号码格式错误");
+        }
+    },false);
+    submit.addEventListener("click",function(){
+        if(name1.nextElementSibling.style.color == "rgb(0, 255, 0)"&&
+            pass1.nextElementSibling.style.color == "rgb(0, 255, 0)"&&
+            pass2.nextElementSibling.style.color == "rgb(0, 255, 0)"&&
+            email.nextElementSibling.style.color == "rgb(0, 255, 0)"&&
+            phone.nextElementSibling.style.color == "rgb(0, 255, 0)")
+            {
+                alert("提交成功!");
+            }
+            else{
+                alert("提交失败，请正确填写。");
+            }
+    },false);
+    function nameIsRight()
+        {
+            if(name1.value=="")
+            {
+                changeRed(name1.nextElementSibling,"内容不能为空");
+            }
+            else if(getLength(name1.value) < 4||getLength(name1.value) > 16)
+            {
+                changeRed(name1.nextElementSibling,"长度只能为为4~16个字符");
+            }
+            else{
+                OK(name1,"名称格式正确");
+            }
+        }
+
+    function getLength(str)
+    {
+        var sum = 0;
+        for(var i = 0;i<str.length;i++)
+        {
+            char_code = str.charCodeAt(i);//取每个字符的charCode
+            if(char_code<=128)
+            {
+                sum++;
+            }
+            else
+              sum+=2;
+        }
+        return sum;
+    }
+    function changeRed(obj,str)
+    {
+        obj.innerHTML=str;
+        obj.style.color="red";
+        obj.previousElementSibling.style.border="2px solid red";
+    }
+    function OK(obj,str){
+        obj.nextElementSibling.innerHTML = str;
+        obj.nextElementSibling.style.color = "#0f0";
+        obj.style.color = "#0f0";
+        obj.style.border = "2px solid #0f0";
+    }
+    </script>
+</body>
+</html>

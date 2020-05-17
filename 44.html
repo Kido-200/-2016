@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+    *{
+        margin:0;
+        padding: 0;
+    }
+    #wf_container{
+        display:flex;
+        justify-content: space-around;
+    }
+    .wf_imgs{
+        box-shadow:10px 10px 5px #888888;
+        cursor:zoom-in;
+        width:100%;
+        margin-bottom:10px;
+    }
+    #mf_mask{
+        height:100%;
+        width:100%;
+        position:fixed;
+        /* 我们虽然100%，100%只能等于可视框的大小但是用fixed的话，怎么移动可视框都会被罩住 */
+        top:0;
+        left:0;
+        /* z-index:-999; */
+    }
+    .wf-mask-background{
+        position:absolute;
+        top:0;
+        bottom: 0;
+        left:0;
+        right: 0;
+        background-color:rgba(0,0,0,.8);
+    }
+    .wf-mask-zoomin{
+        display:block;
+        z-index:999;
+    }
+    </style>
+</head>
+<body>
+    <div id="wf_container"></div>
+    <div id="wf_mask"></div>
+    <script type="text/javascript" src="js/44.js"></script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>task 18</title>
+		<style type="text/css">
+           body{
+			   width:50%;
+			   margin:0 auto;
+		   }
+		   div{
+			   display: flex;
+			   flex-direction:column;
+		   }
+		   li{
+			   display:inline-block;
+			   background-color:rgba(255,0,0,0.5);
+			   margin:2px;
+			   padding: 7px;
+			   color:#fff;
+			   transition:all 1s;
+			   cursor: pointer;
+		   }
+		   ul{
+			   padding: 10px 0;
+		   }
+		   input{
+			border:1px #ff0000 solid;
+			background-color: #fff;
+			border-radius: 15px;
+			padding: 20px;
+			cursor:pointer;
+			transition:all 0.5s;
+		   }
+		   input:hover{
+			background-color: rgba(255, 0, 0, 0.5);
+		   }
+
+		</style>
+	</head>
+	<body>
+        <div>
+           <label for="tag_text">Tag:</label>
+        <input type="text" placeholder="回车/逗号/空格均可完成创建" id="tag_text" onkeyup="addTag(event)">
+		   <ul id="tag_content"></ul>
+		   <textarea placeholder="批量输入多个内容，格式可以为数字、中文、英文等，可以通过用回车，逗号（全角半角均可），顿号，空格（全角半角、Tab等均可）等符号作为不同内容的间隔。" id="interest_text" cols="100" rows="5" style="margin: 0px;  height: 70px;"></textarea>
+		   <input type="button" value="确认兴趣爱好" id="confirBtn">
+		   <ul id="area_content"></ul>
+		   <input type="reset" value="重置" id="resetBtn">
+        </div>
+		
+        <script type="text/javascript">
+		var tag_text = document.getElementById("tag_text");
+		var interest_text = document.getElementById('interest_text');
+  		var tag_content = document.getElementById("tag_content");
+		var area_content = document.getElementById('area_content');
+		var confirBtn = document.getElementById("confirBtn");
+		var resetBtn = document.getElementById("resetBtn");
+		tag_content.addEventListener("click",function(e){
+			var event = e||window.event;
+			var target = e.target||e.srcElement;
+			if(target!=tag_content)
+				tag_content.removeChild(target);
+		},false); 
+		area_content.addEventListener("click",function(e){
+			var event = e||window.event;
+			var target = e.target||e.srcElement;
+
+			if(target!=area_content)	
+				area_content.removeChild(target);
+		},false);
+		function addTag(event){
+				var e = event||window.event;
+				var lastChar = tag_text.value.charAt(tag_text.value.length - 1);
+				if((e.keyCode == 13)||(e.keyCode==32)||(e.keyCode==",")||(lastChar==",")||(lastChar=="，"))
+				{
+					var value = tag_text.value;
+					if(lastChar==","||lastChar=="，")
+						value=value.slice(0,tag_text.value.length-1);
+
+					//不能重复，先去看看已经有没有一样的了
+					var li_list = tag_content.children;
+					for(var i = 0;i<li_list.length;i++)
+					{
+						if(li_list[0].innerHTML==value)
+						{
+							return;
+						}
+					}
+					var li = document.createElement("li");
+					li.innerHTML=value;
+					li.setAttribute("title",value);
+					li.setAttribute("onmouseover","showDelInfo()");
+					li.setAttribute("onmouseout","hideDelInfo()");
+					tag_content.appendChild(li);
+					tag_text.value="";//清空一下
+				}
+		}
+		function addInterest(){
+			var input = getRepExp();//得到一串数组
+			var li_list = area_content.children;
+			if(input==false) return;
+			var len = input.length;
+			for(var i = 0;i<len;i++)
+			{
+				if(input[i]=="") continue;
+				var mark = 1;
+				for(var j = 0;j<li_list.length;j++)
+				{
+					if(li_list[0].innerHTML==input[i])
+						{
+							mark = 0;
+							break;
+						}
+				}
+				if(mark)
+				{
+					var li = document.createElement("li");
+					li.innerHTML=input[i];
+					li.setAttribute("title",input[i]);
+					li.setAttribute("onmouseover","showDelInfo()");//其实这个给父亲用冒泡就行了
+					li.setAttribute("onmouseout","hideDelInfo()");
+					area_content.appendChild(li);
+				}
+			}
+			interest_text.value="";
+		}
+		function showDelInfo(e)
+		{
+			var e = e||window.event;
+			e.target.style.backgroundColor="rgba(0, 255, 0, 0.5)";
+			e.target.innerHTML="点击删除" + e.target.innerHTML;
+		}
+		function hideDelInfo(e)
+		{
+			var e = e||window.event;
+			e.target.style.backgroundColor="rgba(255, 0, 0, 0.5)";
+			e.target.innerHTML=e.target.innerHTML.slice(4);
+		}
+		function getRepExp(){
+			var value = interest_text.value.replace(/[^\w\u4e00-\u9fa5]/g," ").split(" ");
+			if(value!=="")
+			{
+				return value;
+			}
+			else{
+                    alert("输入点东西");
+                    return false;
+            }
+
+		}
+		function reset()
+		{
+			tag_content.innerHTML = "";
+       		tag_text.value = "";
+       		interest_text.value = "";
+       		area_content.innerHTML = "";
+		}
+		confirBtn.addEventListener("click",addInterest,false); 
+		resetBtn.addEventListener("click",reset,false);
+		</script>
+	</body>
+	
+</html>
